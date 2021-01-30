@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
 
     # app
+    'record',
     'authentication',
     'contact',
 
