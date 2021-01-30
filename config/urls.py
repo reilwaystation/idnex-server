@@ -41,6 +41,7 @@ urlpatterns = [
          name='schema-swagger-ui'),
     path('contacts', contact),
     path('auth/', include('authentication.urls')),
+    path('records/', include('record.urls')),
 ]
 
 if settings.DEBUG:

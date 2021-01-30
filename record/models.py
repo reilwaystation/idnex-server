@@ -43,8 +43,8 @@ class Address(models.Model):
 
 
 class Ownership(models.Model):
-    owner = models.ForeignKey(Person, on_delete=models.CASCADE)
-    address = models.ForeignKey(Address, on_delete=models.CASCADE)
+    owner = models.ForeignKey(Person, on_delete=models.CASCADE, null=True)
+    address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
     classification = models.CharField(max_length=255, unique=False)
     price = models.FloatField(max_length=255, unique=False)
     previous = models.FloatField(max_length=255, unique=False)
