@@ -33,9 +33,9 @@ class Address(models.Model):
     barangay = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     province = models.CharField(max_length=255)
-    classification = models.CharField(max_length=255,   blank=True)
-    longitude = models.FloatField(max_length=255,   blank=True)
-    latitude = models.FloatField(max_length=255,   blank=True)
+    classification = models.CharField(max_length=255, blank=True)
+    longitude = models.FloatField(max_length=255, blank=True)
+    latitude = models.FloatField(max_length=255, blank=True)
 
     def __str__(self):
         return f"{self.barangay}, {self.city}, {self.province}"
