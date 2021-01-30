@@ -5,17 +5,17 @@ from django.utils import timezone
 
 
 class Person(models.Model):
-    email = models.EmailField(max_length=255, unique=True)
-    firstname = models.CharField(max_length=255, unique=False, blank=False)
-    lastname = models.CharField(max_length=255, unique=False, blank=False)
-    middlename = models.CharField(max_length=255, unique=False)
-    extension = models.CharField(max_length=255, unique=False)
-    birthdate = models.DateTimeField(default=timezone.now)
-    birthplace = models.CharField(max_length=255, unique=False)
-    status = models.CharField(max_length=255, unique=False)
-    gender = models.CharField(max_length=255, unique=False)
-    phone = models.IntegerField(default=0)
-    nationality = models.CharField(max_length=255, unique=False)
+    email = models.EmailField(max_length=255, blank=True, null=True)
+    firstname = models.CharField(max_length=255)
+    lastname = models.CharField(max_length=255)
+    middlename = models.CharField(max_length=255, blank=True, null=True)
+    extension = models.CharField(max_length=255, blank=True, null=True)
+    birthdate = models.DateTimeField(blank=True, null=True)
+    birthplace = models.CharField(max_length=255, blank=True, null=True)
+    status = models.CharField(max_length=255, blank=True, null=True)
+    gender = models.CharField(max_length=255, blank=True, null=True)
+    phone = models.IntegerField(default=0, blank=True, null=True)
+    nationality = models.CharField(max_length=255, blank=True, null=True)
     spouse = models.ForeignKey(
         'self', blank=True, on_delete=models.SET_NULL, null=True)
     thumbnail = ProcessedImageField(
@@ -29,22 +29,22 @@ class Person(models.Model):
 
 
 class Address(models.Model):
-    number = models.IntegerField(default=0)
-    street = models.CharField(max_length=255, unique=True)
-    barangay = models.CharField(max_length=255, unique=False)
-    city = models.CharField(max_length=255, unique=False)
-    province = models.CharField(max_length=255, unique=False)
-    classification = models.CharField(max_length=255, unique=False)
-    longitude = models.FloatField(max_length=255, unique=False)
-    latitude = models.FloatField(max_length=255, unique=False)
+    number = models.IntegerField(default=0, null=True, blank=True)
+    street = models.CharField(max_length=255, null=True, blank=True)
+    barangay = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    province = models.CharField(max_length=255)
+    classification = models.CharField(max_length=255,  null=True, blank=True)
+    longitude = models.FloatField(max_length=255,  null=True, blank=True)
+    latitude = models.FloatField(max_length=255,  null=True, blank=True)
 
     def __str__(self):
-        return self.barangay
+        return f"{self.barangay}, {self.city}, {self.province}"
 
 
 class Ownership(models.Model):
-    owner = models.ForeignKey(Person, on_delete=models.CASCADE, null=True)
-    address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(Person, on_delete=models.CASCADE)
+    address = models.ForeignKey(Address, on_delete=models.CASCADE)
     classification = models.CharField(max_length=255, unique=False)
     price = models.FloatField(max_length=255, unique=False)
     previous = models.FloatField(max_length=255, unique=False)
