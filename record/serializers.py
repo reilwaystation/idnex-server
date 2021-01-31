@@ -18,3 +18,9 @@ class OwnershipSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ownership
         fields = "__all__"
+
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        response['owner'] = PersonSerializer(instance.owner).data
+        response['address'] = AddressSerializer(instance.address).data
+        return response
