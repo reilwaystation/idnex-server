@@ -10,18 +10,20 @@ class Person(models.Model):
     lastname = models.CharField(max_length=255)
     middlename = models.CharField(max_length=255, blank=True)
     extension = models.CharField(max_length=255, blank=True)
-    birthdate = models.DateTimeField(blank=True, null=True)
+    birthdate = models.DateTimeField(blank=True)
     birthplace = models.CharField(max_length=255, blank=True)
     status = models.CharField(max_length=255, blank=True)
     gender = models.CharField(max_length=255, blank=True)
     phone = models.IntegerField(default=0, blank=True)
     nationality = models.CharField(max_length=255, blank=True)
-    spouse = models.ForeignKey('self', on_delete=models.SET_NULL, null=True)
     thumbnail = ProcessedImageField(
         upload_to='profiles',
         processors=[ResizeToFill(256, 256)],
         format='JPEG',
-        options={'quality': 72})
+        options={'quality': 72},
+        blank=True)
+    spouse = models.ForeignKey(
+        'self', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f"{self.firstname} {self.lastname}"
