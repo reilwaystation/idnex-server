@@ -10,7 +10,7 @@ class Person(models.Model):
     lastname = models.CharField(max_length=255)
     middlename = models.CharField(max_length=255, blank=True)
     extension = models.CharField(max_length=255, blank=True)
-    birthdate = models.DateTimeField(blank=True)
+    birthdate = models.DateField(null=True, blank=True)
     birthplace = models.CharField(max_length=255, blank=True)
     status = models.CharField(max_length=255, blank=True)
     gender = models.CharField(max_length=255, blank=True)
@@ -49,7 +49,7 @@ class Ownership(models.Model):
     classification = models.CharField(max_length=255, blank=True)
     price = models.FloatField(max_length=255, blank=True)
     previous = models.FloatField(max_length=255, blank=True)
-    acquired = models.DateTimeField(blank=True)
+    acquired = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.owner.firstname} {self.owner.lastname}"
